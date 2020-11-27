@@ -1,8 +1,8 @@
 const ProxyChain = require('proxy-chain');
 
 const server = new ProxyChain.Server({
-    // Port where the server will listen. By default 8000.
-    port: 8000,
+    // Port where the server will listen.
+    port: 8118,
 
     // Enables verbose logging
     verbose: true,
@@ -24,12 +24,14 @@ const server = new ProxyChain.Server({
     prepareRequestFunction: ({ request, username, password, hostname, port, isHttp, connectionId }) => {
         return {
             // Require clients to authenticate with username 'bob' and password 'TopSecret'
-            requestAuthentication: username !== 'bob' || password !== 'TopSecret',
+            //requestAuthentication: username !== 'bob' || password !== 'TopSecret',
 
             // Sets up an upstream HTTP proxy to which all the requests are forwarded.
             // If null, the proxy works in direct mode, i.e. the connection is forwarded directly
             // to the target server. This field is ignored if "requestAuthentication" is true.
-            upstreamProxyUrl: `http://username:password@proxy.example.com:3128`,
+            // Берем системный прокси
+            // http_proxy=http://user:password@proxy05.icl.kazan.ru:3128
+            upstreamProxyUrl: process.env.http_proxy,
 
             // If "requestAuthentication" is true, you can use the following property
             // to define a custom error message instead of the default "Proxy credentials required"
