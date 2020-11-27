@@ -1,0 +1,12 @@
+{
+  "name": "pchainns",
+  "version": "1.0.0",
+  "description": "Node.js ProxyChain Wrapper",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "proxy-chain": "^0.4.6"
+  }
+}
